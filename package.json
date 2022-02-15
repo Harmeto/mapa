@@ -1,0 +1,20 @@
+{
+    "name": "nodejsapp",
+    "version": "1.0.0",
+    "description": "Test for an API web service with node and javascript",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "example",
+        "data",
+        "selfie"
+    ],
+    "author": "Carlos Salvo",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.2",
+        "nedb": "^1.8.0"
+    }
+}
