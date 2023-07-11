@@ -1,17 +1,22 @@
 //callback a express
-const { response } = require('express');
-const express = require('express');
+import express from 'express'
 const app = express();
 //Base de datos
-const Datastore = require('nedb');
+import Datastore from 'nedb'
+
 //app escuchando puerto 3000 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`listening on port'${PORT}`));
+
 app.use(express.static('public'));
 app.use(express.json({ limit: '1mb' }));
 
 const database = new Datastore('database.db');
 database.loadDatabase();
+
+
+app.get('/', (req, res)=>{
+    res.render('index.html');
+})
 
 //consigue los datos de /api
 app.get('/api', (request, response) => {
@@ -25,7 +30,6 @@ app.get('/api', (request, response) => {
 
 });
 
-
 //recibe los datos de index.html 
 app.post('/api', (request, response) => {
     const data = request.body;
@@ -35,3 +39,11 @@ app.post('/api', (request, response) => {
     response.json(data);
     console.log('recibido');
 });
+
+//route all in case url doenst exist
+app.all('*', (req, res)=>{
+    res.json({message: 'Not Found'})
+})
+
+
+app.listen(PORT, () => console.log(`listening on port'${PORT}`));
